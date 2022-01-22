@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteRule ^([^/\.]+)/([^/\.]+)?$ verify.php?p=$1&id=$2
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^food\.eshopping\.world$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.food\.eshopping\.world$
+RewriteRule ^(.*)$ "https\:\/\/food\.eshopping\.world\/$1" [R=301,L]
+
